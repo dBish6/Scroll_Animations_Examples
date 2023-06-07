@@ -1,0 +1,66 @@
+section:not(section:nth-child(1)) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Hero */
+section:nth-child(1) {
+  padding-top: 6rem;
+  min-height: 100vh;
+}
+
+section:nth-child(1) div {
+  margin-bottom: 1.5rem;
+}
+
+section:nth-child(1) div h2 {
+  font-size: 4.6rem;
+  text-align: center;
+}
+
+section:nth-child(1) div h2:last-child {
+  font-family: "Josefin Sans", sans-serif;
+  /* font-size: 48px; */
+  font-size: 72px;
+  font-weight: 600;
+  font-style: italic;
+  /* #c608fe 51.99%, */
+  background: -webkit-linear-gradient(
+    77deg,
+    rgba(250, 229, 255, 1) 0%,
+    rgba(122, 53, 230, 1) 75%,
+    rgba(255, 247, 247, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: -1rem;
+}
+
+section:nth-child(1) p {
+  font-size: 1.125rem;
+  text-align: center;
+  max-width: 865px;
+  margin-inline: auto;
+}
+
+/* Scroll */
+
+/* Keep Scrolling */
+
+/* Friends */
+section:nth-child(4) h3 {
+  margin-bottom: 2rem;
+}
+
+section:nth-child(4) .imagesContainer {
+  display: flex;
+  gap: 2.625rem;
+}
+
+section:nth-child(4) .imagesContainer .card {
+  background-color: #363636;
+  border-radius: 6px;
+}

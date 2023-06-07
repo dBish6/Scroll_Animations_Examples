@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+@font-face {
+  font-family: "Kenilla";
+  src: url(./assets/fonts/Kenilla.otf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  color-scheme: dark;
+}
+
+/* TODO: TEST IOS */
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  background: radial-gradient(
+    at 2% 100%,
+    hsla(260, 39%, 19%, 1) 0px,
+    transparent 50%
+  );
+  /* background-repeat: no-repeat; */
+}
+
+main {
+  margin: 0 1.5rem;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Kenilla";
+}
+
+h1 {
+  font-size: 3.2rem;
+}
+
+h2 {
+  font-size: 2.625rem;
+}
+
+p {
+  color: rgba(255, 255, 255, 0.77);
+}

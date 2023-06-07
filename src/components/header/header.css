@@ -1,0 +1,62 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #363636;
+  /* background-color: rgba(54, 54, 54, 0.5); */
+  /* box-shadow: 12px 0 15px -4px rgba(31, 73, 125, 0.8),
+      -12px 0 8px -4px rgba(31, 73, 125, 0.8);
+    box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white,
+      12px 0 15px -4px rgba(31, 73, 125, 0.8),
+      -12px 0 15px -4px rgba(31, 73, 125, 0.8); */
+  z-index: 2;
+}
+
+header.stick {
+  position: sticky;
+  top: 0;
+  background-color: rgba(54, 54, 54, 0.8);
+  animation: bringDown 1s ease-in-out both;
+}
+
+@keyframes bringDown {
+  0% {
+    opacity: 0;
+    filter: blur(3px);
+    transform: translateY(-110px);
+  }
+  50% {
+    opacity: 0.6;
+    filter: blur(1.8px);
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* Change Animations Type Buttons */
+header > div {
+  display: flex;
+  gap: 1rem;
+}
+
+header > div select {
+  display: block;
+  margin-top: 0.5rem;
+  width: 100%;
+  min-height: 1.5rem;
+}
+
+header > div div button {
+  min-width: 142px;
+  min-height: 50px;
+  border-radius: 6px;
+}
+
+header > div div button:first-child {
+}
