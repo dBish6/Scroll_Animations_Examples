@@ -2,21 +2,19 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.5rem;
-  background-color: #363636;
-  /* background-color: rgba(54, 54, 54, 0.5); */
-  /* box-shadow: 12px 0 15px -4px rgba(31, 73, 125, 0.8),
-      -12px 0 8px -4px rgba(31, 73, 125, 0.8);
-    box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white,
-      12px 0 15px -4px rgba(31, 73, 125, 0.8),
-      -12px 0 15px -4px rgba(31, 73, 125, 0.8); */
+  height: 108.8px;
+  padding: calc(1rem - 3px) 1.5rem 1rem 1.5rem;
+  background-color: var(--lvl1);
+  border-top: 3px solid var(--accent);
+  box-shadow: 0px 14px 12px rgba(0, 0, 0, 0.22);
   z-index: 2;
 }
 
 header.stick {
-  position: sticky;
+  position: fixed;
   top: 0;
-  background-color: rgba(54, 54, 54, 0.8);
+  width: 100%;
+  background-color: rgba(38, 37, 45, 0.75);
   animation: bringDown 1s ease-in-out both;
 }
 
@@ -45,18 +43,64 @@ header > div {
   gap: 1rem;
 }
 
-header > div select {
-  display: block;
-  margin-top: 0.5rem;
-  width: 100%;
-  min-height: 1.5rem;
+header > div div {
+  position: relative;
 }
 
-header > div div button {
+header > div div .typeBtn {
   min-width: 142px;
   min-height: 50px;
-  border-radius: 6px;
 }
 
-header > div div button:first-child {
+header > div div:nth-child(2) .panel {
+  position: absolute;
+  top: 35%;
+  right: -6%;
+  border-radius: 6px;
+  background-color: var(--lvl2);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+header > div div:nth-child(2) .panel div {
+  position: relative;
+  margin: 0.5rem 1rem;
+}
+
+header > div div:nth-child(2) .panel div h4 {
+  font-weight: 500;
+  color: #f2f2f2;
+}
+
+header > div div:nth-child(2) .panel div hr {
+  position: absolute;
+  bottom: 2px;
+  width: 100%;
+  border-bottom: 1px solid var(--accent);
+}
+
+header > div div:nth-child(2) .panel ul {
+  display: flex;
+  flex-direction: column;
+}
+
+header > div div:nth-child(2) .panel li button {
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  background-color: #2b2a33;
+  border-top: 1px solid rgb(255, 255, 255, 0.15);
+}
+
+header > div div:nth-child(2) .panel li:last-child button {
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+header > div div:nth-child(2) .panel li button:hover {
+  background-color: #4e4c5c;
+  background-color: #525061;
+}
+
+header > div div:nth-child(2) .panel li button:active {
+  background-color: var(--accent);
 }

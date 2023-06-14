@@ -19,6 +19,12 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   color-scheme: dark;
+
+  --lvl1: #26252d;
+  --lvl2: #35343e;
+  --accent: #8258c3;
+  --accentMed: #af86f0;
+  --accentLgt: #caaef5;
 }
 
 /* TODO: TEST IOS */
@@ -45,10 +51,19 @@ main {
   margin: 0 1.5rem;
 }
 
+ul,
+ol {
+  list-style: none;
+}
+
 h1,
 h2,
 h3 {
   font-family: "Kenilla";
+}
+
+h4 {
+  font-family: "Josefin Sans", sans-serif;
 }
 
 h1 {
@@ -61,4 +76,29 @@ h2 {
 
 p {
   color: rgba(255, 255, 255, 0.77);
+  line-height: 1.5;
+}
+
+button {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  color: #f2f2f2;
+  transition: 0.25s ease all;
+}
+
+button:not(.panel button) {
+  border-radius: 6px;
+  background-color: var(--accent);
+}
+
+button:hover,
+.typeBtn:hover {
+  background-color: var(--accentMed);
+  color: #fff;
+}
+
+button:active,
+.typeBtn:active {
+  background-color: var(--accentLgt);
+  color: #fff;
 }

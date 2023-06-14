@@ -1,5 +1,5 @@
-import { ToAnimateProps } from "../@types/ToAnimateProps";
 import { useLayoutEffect, useTransition, createElement } from "react";
+import { ToAnimateProps } from "../@types/ToAnimateProps";
 import { motion, Variants } from "framer-motion";
 
 // TODO: Pending or suspense?
@@ -47,7 +47,7 @@ const ToAnimate = ({
               ? `toAnimate ${options.className}`
               : "toAnimate",
         },
-        children && children
+        children
       )
     );
   } else if (
@@ -55,6 +55,8 @@ const ToAnimate = ({
     animation === "framerMotionUp"
   ) {
     options && console.log("options.id", options.id);
+    const isHeroElement = options && options.id === "heroElm";
+
     const fadeInSide: Variants = {
       offscreen: {
         opacity: 0,
@@ -72,17 +74,20 @@ const ToAnimate = ({
         rotate: 0,
         transition: {
           type: "spring",
-          bounce: 0.4,
-          duration: 2,
-          delay:
-            options &&
-            (options.id === "card2"
+          damping: isHeroElement ? 50 : 25,
+          mass: isHeroElement ? 8 : 2.15,
+          stiffness: isHeroElement ? 285 : 200,
+          restSpeed: 2,
+          restDelta: 0.01,
+          delay: options
+            ? options.id === "card2"
               ? 0.2
               : options.id === "card3"
               ? 0.4
               : options.id === "card4"
               ? 0.6
-              : undefined),
+              : undefined
+            : undefined,
         },
       },
     };
@@ -100,7 +105,7 @@ const ToAnimate = ({
         whileInView: "onscreen",
         // viewport: { once: true },
       },
-      children && children
+      children
     );
   } else {
     throw new Error(
