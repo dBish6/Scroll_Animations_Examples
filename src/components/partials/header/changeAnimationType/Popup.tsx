@@ -1,14 +1,11 @@
 const Popup = ({ animationType }: { animationType: string }) => {
   return (
-    <div
-      // role="presentation"
-      className="panel"
-    >
+    <div aria-label="Select Panel" role="group" id="popup" className="panel">
       <div>
-        <h4>Select Type</h4>
+        <h5>Select Type</h5>
         <hr />
       </div>
-      <ul>
+      <ul aria-label="Variations">
         <li>
           <button
             onClick={() => {

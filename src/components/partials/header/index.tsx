@@ -6,7 +6,7 @@ import ChangeAnimationType from "./changeAnimationType";
 const Header = () => {
   const handleScroll = () => {
     const header = document.querySelector("header") as Element;
-    header.classList.toggle("stick", window.scrollY > 552); // 112
+    header.classList.toggle("stick", window.scrollY > 113); // 552
   };
 
   useEffect(() => {
@@ -15,6 +15,8 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // TODO: Hide if they want to.
 
   return (
     <header>

@@ -66,8 +66,8 @@ header > div div:nth-child(2) .panel div {
   margin: 0.5rem 1rem;
 }
 
-header > div div:nth-child(2) .panel div h4 {
-  font-weight: 500;
+header > div div:nth-child(2) .panel div h5 {
+  font-weight: 600;
   color: #f2f2f2;
 }
 

@@ -1,44 +1,48 @@
 import { useLayoutEffect, useTransition, createElement } from "react";
 import { ToAnimateProps } from "../@types/ToAnimateProps";
-import { motion, Variants } from "framer-motion";
+import { m, Variants } from "framer-motion";
 
-// TODO: Pending or suspense?
-const ToAnimate = ({
-  animation,
-  tag,
-  options,
-  children,
-}: ToAnimateProps): JSX.Element => {
+const ToAnimate = ({ animation, tag, options, children }: ToAnimateProps) => {
   const [isPending, startTransition] = useTransition();
-  console.log("animation", animation);
+  // console.log("animation", animation);
+
   if (animation === "css") {
     useLayoutEffect(() => {
+      let observer: IntersectionObserver;
+
       startTransition(() => {
         import("../scroll.css").then(() => {
-          const observer = new IntersectionObserver(
-            (entries: IntersectionObserverEntry[]) => {
-              entries.forEach((entry: IntersectionObserverEntry) => {
-                // console.log("entry", entry);
-                if (entry.isIntersecting) {
-                  entry.target.classList.add("sAnimate");
-                } else {
-                  entry.target.classList.remove("sAnimate");
+          observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              const isCardOptions =
+                entry.target.classList.contains("card") &&
+                options &&
+                options.setDisableActions;
+
+              if (entry.isIntersecting) {
+                entry.target.classList.add("sAnimate");
+                if (isCardOptions) {
+                  setTimeout(() => {
+                    options.setDisableActions!(false); // To enable the action on the ImageCard.
+                  }, 1900); // Keyframes duration with delay.
                 }
-              });
-            }
-          );
+              } else {
+                entry.target.classList.remove("sAnimate");
+                if (isCardOptions) options.setDisableActions!(true);
+              }
+            });
+          });
+
           document.querySelectorAll(".toAnimate").forEach((elem) => {
-            // console.log(elem);
             observer.observe(elem);
           });
         });
       });
+      return () => observer.disconnect();
     }, []);
 
-    return isPending ? (
-      <div>Loading...</div>
-    ) : (
-      createElement(
+    if (!isPending)
+      return createElement(
         tag,
         {
           ...options,
@@ -48,35 +52,42 @@ const ToAnimate = ({
               : "toAnimate",
         },
         children
-      )
-    );
+      );
+    return null;
   } else if (
     animation === "framerMotionSide" ||
     animation === "framerMotionUp"
   ) {
-    options && console.log("options.id", options.id);
-    const isHeroElement = options && options.id === "heroElm";
+    // options && console.log("options.id", options.id);
+    const isHeroElement = options && options.id === "heroElem",
+      isCard = options && options.id?.toString().includes("card"),
+      isSmallElement = options && options.id === "smallElem";
 
-    const fadeInSide: Variants = {
+    // prettier-ignore
+    const fadeIn: Variants = {
       offscreen: {
         opacity: 0,
         translateX:
-          options && options.className === "card"
-            ? "-100%"
-            : Math.round(Math.random()) % 2 === 0
-            ? "-100%"
-            : "100%",
-        rotate: -10,
+          animation === "framerMotionSide"
+            ? options && options.className === "card"
+              ? "-100%"
+              : Math.round(Math.random()) % 2 === 0
+              ? "-100%"
+              : "100%"
+            : 0,
+        translateY: animation === "framerMotionUp" ? (isSmallElement ? "150%" : "100%") : 0,
+        rotate: animation === "framerMotionUp" ? 0 : -10,
       },
       onscreen: {
         opacity: 1,
         translateX: 0,
+        translateY: 0,
         rotate: 0,
         transition: {
           type: "spring",
-          damping: isHeroElement ? 50 : 25,
-          mass: isHeroElement ? 8 : 2.15,
-          stiffness: isHeroElement ? 285 : 200,
+          damping: animation === "framerMotionSide" ? (isHeroElement ? 50 : 27) : isCard ? 10 : isHeroElement ? 11 : 13,
+          mass: animation === "framerMotionSide" ? (isHeroElement ? 8 : 2.15) : isCard ? 1.5 : isHeroElement ? 3.15 : 2.15,
+          stiffness: animation === "framerMotionSide" ? (isHeroElement ? 285 : 200) : isCard ? 35 : isHeroElement ? 85 : 70,
           restSpeed: 2,
           restDelta: 0.01,
           delay: options
@@ -92,15 +103,12 @@ const ToAnimate = ({
       },
     };
 
-    const fadeInUp: Variants = {};
-
-    // TODO: Up.
-
     return createElement(
-      motion[tag],
+      (m as any)[tag],
       {
         ...options,
-        variants: animation === "framerMotionSide" ? fadeInSide : fadeInUp,
+        "aria-label": "Test",
+        variants: fadeIn,
         initial: "offscreen",
         whileInView: "onscreen",
         // viewport: { once: true },

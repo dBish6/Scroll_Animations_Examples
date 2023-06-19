@@ -1,24 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import Popup from "./Popup";
 
 const ChangeAnimationType = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    console.log("isOpen", isOpen);
-  }, [isOpen]);
-
   const animationType = localStorage.getItem("animation_type")!;
 
   return (
     <div>
-      <div role="group">
+      <div role="presentation">
         <button
           className="typeBtn"
           onClick={() => {
-            localStorage.setItem("animation_type", "css");
-            window.location.reload();
+            if (animationType !== "css") {
+              localStorage.setItem("animation_type", "css");
+              window.location.reload();
+            }
           }}
         >
           CSS Key Frames
@@ -27,8 +25,13 @@ const ChangeAnimationType = () => {
           <option value=""></option>
         </select> */}
       </div>
-      <div role="group">
-        <button className="typeBtn" onClick={() => setIsOpen(!isOpen)}>
+      <div role="presentation">
+        <button
+          aria-controls="popup"
+          aria-pressed={isOpen}
+          className="typeBtn"
+          onClick={() => setIsOpen(!isOpen)}
+        >
           Framer Motion Lib
         </button>
         {isOpen && <Popup animationType={animationType} />}

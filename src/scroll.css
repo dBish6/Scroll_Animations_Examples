@@ -2,15 +2,15 @@
   animation: fadeInLeft 1.3s ease-out both;
 }
 
-.toAnimate.sAnimate.card:nth-child(2) {
+.toAnimate.sAnimate.card#card2 {
   animation-delay: 200ms;
 }
 
-.toAnimate.sAnimate.card:nth-child(3) {
+.toAnimate.sAnimate.card#card3 {
   animation-delay: 400ms;
 }
 
-.toAnimate.sAnimate.card:nth-child(4) {
+.toAnimate.sAnimate.card#card4 {
   animation-delay: 600ms;
 }
 
