@@ -51,6 +51,12 @@ main {
   margin: 0 1.5rem;
 }
 
+@media screen and (max-width: 635px) {
+  main {
+    margin: 0 0.5rem;
+  }
+}
+
 ul,
 ol {
   list-style: none;
@@ -63,7 +69,12 @@ h3 {
 }
 
 h1 {
-  font-size: 3.2rem;
+  /* font-size: 3.2rem; */
+  font-size: clamp(
+    2.625rem,
+    2.315756302521008rem + 1.5462184873949585vw,
+    3.2rem
+  );
 }
 
 h2 {
@@ -78,7 +89,8 @@ h4 {
 
 p {
   color: rgba(255, 255, 255, 0.77);
-  line-height: 1.5;
+  line-height: 1.65;
+  text-align: center;
 }
 
 button {

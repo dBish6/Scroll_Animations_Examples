@@ -6,6 +6,7 @@ import Loading from "../loading";
 import Hero from "./Hero";
 import Scroll from "./Scroll";
 import KeepScrolling from "./KeepScrolling";
+import Infinite from "./Infinite";
 import Friends from "./friends";
 import ToAnimate from "../ToAnimate";
 
@@ -72,21 +73,7 @@ const Sections = () => {
       {animationType ? (
         animationType === "css" ? (
           <>
-            <section>
-              <Hero ToAnimate={ToAnimate} animationType={animationType} />
-            </section>
-            <section>
-              <Scroll ToAnimate={ToAnimate} animationType={animationType} />
-            </section>
-            <section>
-              <KeepScrolling
-                ToAnimate={ToAnimate}
-                animationType={animationType}
-              />
-            </section>
-            <section>
-              <Friends ToAnimate={ToAnimate} animationType={animationType} />
-            </section>
+            <SectionContent animationType={animationType} />
           </>
         ) : (
           <>
@@ -94,24 +81,7 @@ const Sections = () => {
               <FramerFeatureBundleRef.current.LazyMotion
                 features={FramerFeatureBundleRef.current.domAnimation}
               >
-                <section role="region">
-                  <Hero ToAnimate={ToAnimate} animationType={animationType} />
-                </section>
-                <section>
-                  <Scroll ToAnimate={ToAnimate} animationType={animationType} />
-                </section>
-                <section>
-                  <KeepScrolling
-                    ToAnimate={ToAnimate}
-                    animationType={animationType}
-                  />
-                </section>
-                <section>
-                  <Friends
-                    ToAnimate={ToAnimate}
-                    animationType={animationType}
-                  />
-                </section>
+                <SectionContent animationType={animationType} />
               </FramerFeatureBundleRef.current.LazyMotion>
             )}
           </>
@@ -119,6 +89,40 @@ const Sections = () => {
       ) : (
         <Loading />
       )}
+    </>
+  );
+};
+
+const SectionContent = ({ animationType }: { animationType: string }) => {
+  return (
+    <>
+      <section className="heroSection">
+        <Hero ToAnimate={ToAnimate} animationType={animationType} />
+      </section>
+      <section>
+        <Scroll ToAnimate={ToAnimate} animationType={animationType} />
+      </section>
+      <section>
+        <KeepScrolling ToAnimate={ToAnimate} animationType={animationType} />
+      </section>
+      {(animationType === "framerMotionSide" ||
+        animationType === "framerMotionUp") && (
+        <section className="infiniteSection">
+          <Infinite
+            animationType={animationType}
+            text="Scroll Unprecedented"
+            baseVelocity={200}
+          />
+          <Infinite
+            animationType={animationType}
+            text="Scroll Unprecedented"
+            baseVelocity={-200}
+          />
+        </section>
+      )}
+      <section>
+        <Friends ToAnimate={ToAnimate} animationType={animationType} />
+      </section>
     </>
   );
 };

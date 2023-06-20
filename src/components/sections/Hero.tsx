@@ -1,6 +1,8 @@
 import { SectionProps } from "../../@types/SectionProps";
 import { createElement } from "react";
 
+import ScrollIndicator from "../scroll_Indicator";
+
 const Hero = ({ ToAnimate, animationType }: SectionProps) => {
   return (
     <>
@@ -20,7 +22,7 @@ const Hero = ({ ToAnimate, animationType }: SectionProps) => {
                 "Experience the magic of scroll animations and bring your website to life! Just use the buttons on the top of the screen to experiment with what animation method that you want to use. 😄"
               ),
             ]}
-            options={{ id: "heroElem" }}
+            options={{ className: "heroContainer", id: "heroElem" }}
           />
         </>
       ) : (
@@ -40,13 +42,10 @@ const Hero = ({ ToAnimate, animationType }: SectionProps) => {
             children="Experience the magic of scroll animations and bring your website to life! Just use the buttons on the top of the screen to experiment with what animation method that you want to use. 😄"
             options={{ id: "heroElem" }}
           />
-          <ToAnimate
-            animation={animationType}
-            tag="img"
-            options={{ id: "heroElem" }}
-          />
         </>
       )}
+
+      <ScrollIndicator />
     </>
   );
 };

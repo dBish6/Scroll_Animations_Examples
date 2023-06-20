@@ -1,25 +1,27 @@
-import { useEffect } from "react";
+import { useRef, useEffect } from "react";
 import "./header.css";
 
 import ChangeAnimationType from "./changeAnimationType";
 
 const Header = () => {
-  const handleScroll = () => {
-    const header = document.querySelector("header") as Element;
-    header.classList.toggle("stick", window.scrollY > 113); // 552
-  };
+  const headerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
+    const handleStick = () => {
+      if (window.scrollY > 113) {
+        headerRef.current!.classList.remove("unStick");
+      } else if (headerRef.current!.classList.contains("stick")) {
+        headerRef.current!.classList.add("unStick");
+      }
+      headerRef.current!.classList.toggle("stick", window.scrollY > 113);
     };
+
+    window.addEventListener("scroll", handleStick);
+    return () => window.removeEventListener("scroll", handleStick);
   }, []);
 
-  // TODO: Hide if they want to.
-
   return (
-    <header>
+    <header ref={headerRef}>
       <h1>Scroll.Animate</h1>
       <ChangeAnimationType />
     </header>
