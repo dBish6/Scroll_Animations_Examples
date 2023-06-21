@@ -1,12 +1,8 @@
 footer {
   display: flex;
-  justify-content: space-evenly;
-  /* padding: 1rem 1.5rem; */
+  align-items: flex-end;
+  flex-direction: column;
   padding: 0.5rem 1.5rem;
-  /* padding-inline: 1.5rem; */
-  background-color: var(--lvl1);
-  background-color: rgba(38, 37, 45, 0.5);
-  /* border-top: 2px solid var(--accent); */
 }
 
 @media screen and (max-width: 1149px) {
@@ -15,10 +11,52 @@ footer {
   }
 }
 
-/* footer p:first-child {
-  flex: 1;
+footer p {
+  color: rgba(255, 255, 255, 0.87);
+  text-align: left;
 }
 
-footer p:last-child {
-  flex: 1;
-} */
+footer p::after {
+  content: "";
+  display: block;
+  position: relative;
+  right: 27%;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  width: 130%;
+  height: 1px;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.5)
+  );
+}
+
+footer a {
+  font-size: 14px;
+  opacity: 0.75;
+  transition: 0.32s ease;
+  border-bottom: 1px solid transparent;
+}
+
+footer a:hover {
+  opacity: 1;
+  border-bottom: 1px solid #8258c3;
+}
+
+footer a:active {
+  color: #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+footer a img {
+  position: relative;
+  top: 4px;
+}
+
+footer small {
+  color: rgba(255, 255, 255, 0.8);
+  transform: skew(-15deg);
+}
