@@ -13,7 +13,6 @@ section:nth-child(1) {
 }
 
 section:nth-child(1) div:not(.heroContainer, .indicator, .arrowContainer) {
-  /* margin-bottom: 1.5rem; */
   margin-bottom: 1rem;
 }
 
@@ -28,7 +27,6 @@ section:nth-child(1) div h2 {
 
 section:nth-child(1) div h2:last-child {
   font-family: "Josefin Sans", sans-serif;
-  /* font-size: 72px; */
   font-weight: 600;
   font-style: italic;
   background: -webkit-linear-gradient(
@@ -58,7 +56,6 @@ section:nth-child(1) div h2:last-child {
 }
 
 section:nth-child(1) p {
-  /* font-size: 1.125rem; */
   font-size: clamp(
     1rem,
     0.8947368421052632rem + 0.5263157894736842vw,
@@ -69,15 +66,8 @@ section:nth-child(1) p {
   margin-inline: auto;
 }
 
-/* Scroll */
-
-/* Keep Scrolling */
-
 /* Infinite Text */
-.infiniteSection {
-}
-
-.infiniteSection .scroller {
+section:nth-last-child(2) .scroller {
   white-space: nowrap;
 }
 

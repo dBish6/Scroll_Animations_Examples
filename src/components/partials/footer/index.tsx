@@ -4,7 +4,7 @@ import externalIcon from "../../../assets/icons/external-link.svg";
 const Footer = () => {
   return (
     <footer>
-      <p>
+      <p aria-label="Developer">
         Created By:{" "}
         <a
           href="https://github.com/dBish6"

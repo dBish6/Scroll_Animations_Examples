@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { SectionProps } from "../../@types/SectionProps";
+import { SectionProps } from "../../@types/SectionsProps";
 
 const KeepScrolling = ({ ToAnimate, animationType }: SectionProps) => {
   return (

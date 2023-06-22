@@ -32,3 +32,32 @@
     animation: none;
   }
 }
+
+section:nth-last-child(2) .scrollerWrapper {
+  display: flex;
+  gap: 1rem;
+}
+
+section:nth-last-child(2) .scrollerWrapper .scroller {
+  animation: var(--dir) 16s linear infinite;
+}
+
+@keyframes left {
+  0% {
+    transform: translateX(930px);
+  }
+
+  100% {
+    transform: translateX(-910px);
+  }
+}
+
+@keyframes right {
+  0% {
+    transform: translateX(-930px);
+  }
+
+  100% {
+    transform: translateX(910px);
+  }
+}

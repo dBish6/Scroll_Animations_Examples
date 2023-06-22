@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { ImageCardProps } from "../../../@types/SectionProps";
+import { ImageCardProps } from "../../../@types/SectionsProps";
 import Tilt from "react-parallax-tilt";
 
 const ImageCard = ({
@@ -33,7 +33,7 @@ const ImageCard = ({
           createElement("h4", { key: "friendName" }, name),
           createElement("img", {
             src,
-            alt: `Friend ${index}`,
+            alt: `${name}`,
             key: "friendImage",
           }),
         ]}
@@ -42,6 +42,7 @@ const ImageCard = ({
           ...(setDisableActions && { setDisableActions }),
           id: `card${index + 1}`,
           className: "card",
+          "aria-label": `${name}'s Card`,
         }}
       />
     </Tilt>

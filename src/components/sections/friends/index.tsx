@@ -1,5 +1,5 @@
 import { useRef, useState, useLayoutEffect } from "react";
-import { SectionProps } from "../../../@types/SectionProps";
+import { SectionProps } from "../../../@types/SectionsProps";
 import friendImages from "../../../assets/images/bundle";
 import ImageCard from "./ImageCard";
 

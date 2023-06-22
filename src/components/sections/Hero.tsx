@@ -1,4 +1,4 @@
-import { SectionProps } from "../../@types/SectionProps";
+import { SectionProps } from "../../@types/SectionsProps";
 import { createElement } from "react";
 
 import ScrollIndicator from "../scroll_Indicator";

@@ -6,7 +6,7 @@ import Loading from "../loading";
 import Hero from "./Hero";
 import Scroll from "./Scroll";
 import KeepScrolling from "./KeepScrolling";
-import Infinite from "./Infinite";
+import InfiniteTxt from "./infiniteTxt";
 import Friends from "./friends";
 import ToAnimate from "../ToAnimate";
 
@@ -94,9 +94,11 @@ const Sections = () => {
 };
 
 const SectionContent = ({ animationType }: { animationType: string }) => {
+  const infiniteSectionRef = useRef<HTMLDivElement>(null);
+
   return (
     <>
-      <section className="heroSection">
+      <section>
         <Hero ToAnimate={ToAnimate} animationType={animationType} />
       </section>
       <section>
@@ -105,21 +107,12 @@ const SectionContent = ({ animationType }: { animationType: string }) => {
       <section>
         <KeepScrolling ToAnimate={ToAnimate} animationType={animationType} />
       </section>
-      {(animationType === "framerMotionSide" ||
-        animationType === "framerMotionUp") && (
-        <section className="infiniteSection">
-          <Infinite
-            animationType={animationType}
-            text="Scroll Unprecedented"
-            baseVelocity={200}
-          />
-          <Infinite
-            animationType={animationType}
-            text="Scroll Unprecedented"
-            baseVelocity={-200}
-          />
-        </section>
-      )}
+      <section ref={infiniteSectionRef}>
+        <InfiniteTxt
+          animationType={animationType}
+          infiniteSectionRef={infiniteSectionRef}
+        />
+      </section>
       <section>
         <Friends ToAnimate={ToAnimate} animationType={animationType} />
       </section>

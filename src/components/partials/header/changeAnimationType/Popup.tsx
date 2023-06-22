@@ -3,7 +3,6 @@ const Popup = ({ animationType }: { animationType: string }) => {
     <div aria-label="Select Panel" role="group" id="popup" className="panel">
       <div>
         <h5>Select Type</h5>
-        <hr />
       </div>
       <ul aria-label="Variations">
         <li>

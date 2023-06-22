@@ -13,3 +13,12 @@ export type ImageCardProps = SectionProps & {
   disableActions?: boolean;
   setDisableActions?: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export type InfiniteProps = {
+  animationType: string;
+  infiniteSectionRef: React.RefObject<HTMLDivElement>;
+};
+
+export type InfiniteFramerProps = InfiniteProps & {
+  baseVelocity: number;
+};
