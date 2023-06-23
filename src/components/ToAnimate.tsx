@@ -9,11 +9,11 @@ const ToAnimate = ({ animation, tag, options, children }: ToAnimateProps) => {
 
   if (animation === "css") {
     useLayoutEffect(() => {
-      let observer: IntersectionObserver;
+      let observerCleanup: IntersectionObserver;
 
       startTransition(() => {
         loadScrollCSS().then(() => {
-          observer = new IntersectionObserver((entries) => {
+          const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
               const isCardOptions =
                 entry.target.classList.contains("card") &&
@@ -33,13 +33,14 @@ const ToAnimate = ({ animation, tag, options, children }: ToAnimateProps) => {
               }
             });
           });
+          observerCleanup = observer;
 
           document.querySelectorAll(".toAnimate").forEach((elem) => {
             observer.observe(elem);
           });
         });
       });
-      return () => observer && observer.disconnect();
+      return () => observerCleanup && observerCleanup.disconnect();
     }, []);
 
     if (!isPending)
