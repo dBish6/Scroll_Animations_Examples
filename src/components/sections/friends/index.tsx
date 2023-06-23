@@ -8,10 +8,12 @@ const Friends = ({ ToAnimate, animationType }: SectionProps) => {
     cardRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+    let observer: IntersectionObserver;
+
     if (cardRef.current && animationType !== "css") {
       const ANIMATION_DURATION = 2138;
 
-      const observer = new IntersectionObserver((entries) => {
+      observer = new IntersectionObserver((entries) => {
         const [entry] = entries;
         if (entry.isIntersecting) {
           setTimeout(() => {
@@ -22,9 +24,8 @@ const Friends = ({ ToAnimate, animationType }: SectionProps) => {
         }
       });
       observer.observe(cardRef.current);
-
-      return () => observer.disconnect();
     }
+    return () => observer.disconnect();
   }, []);
 
   return (
