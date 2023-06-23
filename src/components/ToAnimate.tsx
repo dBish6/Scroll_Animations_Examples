@@ -39,7 +39,7 @@ const ToAnimate = ({ animation, tag, options, children }: ToAnimateProps) => {
           });
         });
       });
-      return () => observer && observer.disconnect();
+      // return () => observer && observer.disconnect();
     }, []);
 
     if (!isPending)
