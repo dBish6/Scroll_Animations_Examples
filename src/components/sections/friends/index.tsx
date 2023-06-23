@@ -25,7 +25,7 @@ const Friends = ({ ToAnimate, animationType }: SectionProps) => {
       });
       observer.observe(cardRef.current);
     }
-    return () => observer.disconnect();
+    return () => observer && observer.disconnect();
   }, []);
 
   return (
