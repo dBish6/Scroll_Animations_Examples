@@ -1,6 +1,7 @@
 import { useLayoutEffect, useTransition, createElement } from "react";
 import { ToAnimateProps } from "../@types/ToAnimateProps";
 import { m, Variants } from "framer-motion";
+import loadScrollCSS from "../utils/loadScrollCSS";
 
 const ToAnimate = ({ animation, tag, options, children }: ToAnimateProps) => {
   const [isPending, startTransition] = useTransition();
@@ -11,7 +12,7 @@ const ToAnimate = ({ animation, tag, options, children }: ToAnimateProps) => {
       let observer: IntersectionObserver;
 
       startTransition(() => {
-        import("../scroll.css").then(() => {
+        loadScrollCSS().then(() => {
           observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
               const isCardOptions =
