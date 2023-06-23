@@ -12,26 +12,27 @@ const ToAnimate = ({ animation, tag, options, children }: ToAnimateProps) => {
       let observer: IntersectionObserver;
 
       startTransition(() => {
-        loadScrollCSS().then(() => {
-          observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-              const isCardOptions =
-                entry.target.classList.contains("card") &&
-                options &&
-                options.setDisableActions;
+        loadScrollCSS();
+        observer = new IntersectionObserver((entries) => {
+          console.log("STARTED");
+          entries.forEach((entry) => {
+            const isCardOptions =
+              entry.target.classList.contains("card") &&
+              options &&
+              options.setDisableActions;
 
-              if (entry.isIntersecting) {
-                entry.target.classList.add("sAnimate");
-                if (isCardOptions) {
-                  setTimeout(() => {
-                    options.setDisableActions!(false); // To enable the action on the ImageCard.
-                  }, 1900); // Keyframes duration with delay.
-                }
-              } else {
-                entry.target.classList.remove("sAnimate");
-                if (isCardOptions) options.setDisableActions!(true);
+            if (entry.isIntersecting) {
+              console.log("WHY");
+              entry.target.classList.add("sAnimate");
+              if (isCardOptions) {
+                setTimeout(() => {
+                  options.setDisableActions!(false); // To enable the action on the ImageCard.
+                }, 1900); // Keyframes duration with delay.
               }
-            });
+            } else {
+              entry.target.classList.remove("sAnimate");
+              if (isCardOptions) options.setDisableActions!(true);
+            }
           });
 
           document.querySelectorAll(".toAnimate").forEach((elem) => {
