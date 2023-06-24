@@ -20,8 +20,8 @@
   -webkit-text-size-adjust: 100%;
   color-scheme: dark;
 
-  --lvl1: #26252d;
-  --lvl2: #35343e;
+  --lvl1: #24202f;
+  --lvl2: #26232f;
   --accent: #8258c3;
   --accentMed: #af86f0;
   --accentLgt: #caaef5;
@@ -38,12 +38,12 @@ body {
   font-weight: 400;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
   background: radial-gradient(
     at 2% 100%,
     hsla(260, 39%, 19%, 1) 0px,
     transparent 50%
   );
+  background-color: #221f2d;
   overflow-y: hidden;
 }
 
@@ -69,7 +69,6 @@ h3 {
 }
 
 h1 {
-  /* font-size: 3.2rem; */
   font-size: clamp(
     2.625rem,
     2.315756302521008rem + 1.5462184873949585vw,

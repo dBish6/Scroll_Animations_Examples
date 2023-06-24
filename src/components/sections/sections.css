@@ -99,9 +99,7 @@ section:nth-last-child(1) .imagesContainer {
 }
 
 section:nth-last-child(1) .imagesContainer .card {
-  background-color: #363636;
-  background-color: var(--lvl2);
-  background-color: rgba(53, 52, 62, 0.5);
+  background-color: rgba(38, 35, 47, 0.75);
   border-top: 1px solid var(--accent);
   border-inline: 2px solid rgba(0, 0, 0, 0.55);
   border-bottom: 2px solid rgba(0, 0, 0, 0.55);
