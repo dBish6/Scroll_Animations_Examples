@@ -8,18 +8,16 @@ const Header = () => {
 
   useEffect(() => {
     const handleStick = () => {
-      if (headerRef) {
-        if (window.scrollY > 113) {
-          headerRef.current!.classList.remove("unStick");
-        } else if (headerRef.current!.classList.contains("stick")) {
-          headerRef.current!.classList.add("unStick");
-        }
-        headerRef.current!.classList.toggle("stick", window.scrollY > 113);
+      if (window.scrollY > 113) {
+        headerRef.current!.classList.remove("unStick");
+      } else if (headerRef.current!.classList.contains("stick")) {
+        headerRef.current!.classList.add("unStick");
       }
-
-      window.addEventListener("scroll", handleStick);
-      return () => window.removeEventListener("scroll", handleStick);
+      headerRef.current!.classList.toggle("stick", window.scrollY > 113);
     };
+
+    window.addEventListener("scroll", handleStick);
+    return () => window.removeEventListener("scroll", handleStick);
   }, [headerRef]);
 
   return (
