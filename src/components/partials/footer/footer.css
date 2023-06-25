@@ -13,7 +13,7 @@ footer {
   }
 }
 
-footer p {
+footer p:first-of-type {
   color: rgba(255, 255, 255, 0.87);
 }
 
@@ -58,7 +58,7 @@ footer a img {
 }
 
 footer small {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.77);
   transform: skew(-15deg);
 }
 
