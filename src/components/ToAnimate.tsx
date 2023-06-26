@@ -42,11 +42,20 @@ const ToAnimate = ({ animation, tag, options, children }: ToAnimateProps) => {
       return () => observer && observer.disconnect();
     }, []);
 
-    if (!isPending)
+    if (!isPending) {
+      let filteredOptions: object | undefined = undefined;
+      if (options) {
+        filteredOptions = options;
+        if (options.setDisableActions) {
+          // Removes setDisableActions from being applied to the element.
+          const { setDisableActions, ...rest } = options;
+          filteredOptions = rest;
+        }
+      }
       return createElement(
         tag,
         {
-          ...options,
+          ...filteredOptions,
           className:
             options && options.className
               ? `toAnimate ${options.className}`
@@ -54,6 +63,7 @@ const ToAnimate = ({ animation, tag, options, children }: ToAnimateProps) => {
         },
         children
       );
+    }
     return null;
   } else if (
     animation === "framerMotionSide" ||
