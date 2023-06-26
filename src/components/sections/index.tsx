@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useLayoutEffect, useEffect } from "react";
 import { FeatureBundle } from "framer-motion";
 import "./sections.css";
 
@@ -66,6 +66,28 @@ const Sections = () => {
       }
     };
     loadAnimationType();
+  }, []);
+
+  useEffect(() => {
+    console.log("RUNNING");
+
+    const observer = new IntersectionObserver((entries) => {
+      console.log("entries", entries);
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("sAnimate");
+        } else {
+          entry.target.classList.remove("sAnimate");
+        }
+      });
+    });
+
+    document.querySelectorAll(".toAnimate").forEach((elem) => {
+      console.log("elem", elem);
+      observer.observe(elem);
+    });
+
+    return () => observer && observer.disconnect();
   }, []);
 
   return (
