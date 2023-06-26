@@ -15,7 +15,7 @@ header.stick {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: rgba(38, 37, 45, 0.75);
+  background-color: rgba(36, 32, 47, 0.75);
   animation: bringDown 1s ease-in-out both;
 }
 
