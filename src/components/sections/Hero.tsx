@@ -6,28 +6,28 @@ import ScrollIndicator from "../scroll_Indicator";
 const Hero = ({ ToAnimate, animationType }: SectionProps) => {
   // const observer = useRef<IntersectionObserver>();
 
-  useEffect(() => {
-    console.log("RUNNING");
-    if (animationType === "css") {
-      const observer = new IntersectionObserver((entries) => {
-        console.log("entries", entries);
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("sAnimate");
-          } else {
-            entry.target.classList.remove("sAnimate");
-          }
-        });
-      });
+  // useEffect(() => {
+  //   console.log("RUNNING");
+  //   if (animationType === "css") {
+  //     const observer = new IntersectionObserver((entries) => {
+  //       console.log("entries", entries);
+  //       entries.forEach((entry) => {
+  //         if (entry.isIntersecting) {
+  //           entry.target.classList.add("sAnimate");
+  //         } else {
+  //           entry.target.classList.remove("sAnimate");
+  //         }
+  //       });
+  //     });
 
-      document.querySelectorAll(".toAnimate").forEach((elem) => {
-        console.log("elem", elem);
-        observer.observe(elem);
-      });
+  //     document.querySelectorAll(".toAnimate").forEach((elem) => {
+  //       console.log("elem", elem);
+  //       observer.observe(elem);
+  //     });
 
-      return () => observer && observer.disconnect();
-    }
-  }, []);
+  //     return () => observer && observer.disconnect();
+  //   }
+  // }, []);
 
   // useEffect(() => {
   //   if (observer.current)
