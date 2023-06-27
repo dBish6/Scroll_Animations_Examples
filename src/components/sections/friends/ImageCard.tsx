@@ -10,7 +10,6 @@ const ImageCard = ({
   name,
   cardRef,
   disableActions,
-  setDisableActions,
 }: ImageCardProps) => {
   return (
     <Tilt
@@ -38,8 +37,7 @@ const ImageCard = ({
           }),
         ]}
         options={{
-          ...(cardRef && { ref: cardRef }),
-          ...(setDisableActions && { setDisableActions }),
+          ref: cardRef,
           id: `card${index + 1}`,
           className: "card",
           "aria-label": `${name}'s Card`,

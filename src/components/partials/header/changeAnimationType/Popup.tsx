@@ -1,6 +1,6 @@
 import { PopupProps } from "../../../../@types/PopupProps";
 
-const Popup = ({ animationType, isClicked, setIsClicked }: PopupProps) => {
+const Popup = ({ animationType, setAnimationType }: PopupProps) => {
   return (
     <div aria-label="Select Panel" role="group" id="popup" className="panel">
       <div>
@@ -9,42 +9,26 @@ const Popup = ({ animationType, isClicked, setIsClicked }: PopupProps) => {
       <ul aria-label="Variations">
         <li>
           <button
-            className={isClicked.framerSide ? "loading" : undefined}
             onClick={() => {
               if (animationType !== "framerMotionSide") {
-                setIsClicked((prev) => ({ ...prev, framerSide: true }));
                 localStorage.setItem("animation_type", "framerMotionSide");
-                window.location.reload();
+                setAnimationType("framerMotionSide");
               }
             }}
-            disabled={isClicked.framerUp}
-            aria-disabled={isClicked.framerUp}
-            style={{
-              opacity: isClicked.framerUp ? "0.6" : "1",
-              cursor: isClicked.framerUp ? "not-allowed" : "pointer",
-            }}
           >
-            {isClicked.framerSide ? <div className="spinner" /> : "Side"}
+            Side
           </button>
         </li>
         <li>
           <button
-            className={isClicked.framerUp ? "loading" : undefined}
             onClick={() => {
               if (animationType !== "framerMotionUp") {
-                setIsClicked((prev) => ({ ...prev, framerUp: true }));
                 localStorage.setItem("animation_type", "framerMotionUp");
-                window.location.reload();
+                setAnimationType("framerMotionUp");
               }
             }}
-            disabled={isClicked.framerSide}
-            aria-disabled={isClicked.framerSide}
-            style={{
-              opacity: isClicked.framerSide ? "0.4" : "1",
-              cursor: isClicked.framerSide ? "not-allowed" : "pointer",
-            }}
           >
-            {isClicked.framerUp ? <div className="spinner" /> : "Up"}
+            Up
           </button>
         </li>
       </ul>

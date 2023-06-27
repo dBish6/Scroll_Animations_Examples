@@ -1,42 +1,9 @@
 import { SectionProps } from "../../@types/SectionsProps";
-import { useRef, useEffect, createElement } from "react";
+import { createElement } from "react";
 
 import ScrollIndicator from "../scroll_Indicator";
 
 const Hero = ({ ToAnimate, animationType }: SectionProps) => {
-  // const observer = useRef<IntersectionObserver>();
-
-  // useEffect(() => {
-  //   console.log("RUNNING");
-  //   if (animationType === "css") {
-  //     const observer = new IntersectionObserver((entries) => {
-  //       console.log("entries", entries);
-  //       entries.forEach((entry) => {
-  //         if (entry.isIntersecting) {
-  //           entry.target.classList.add("sAnimate");
-  //         } else {
-  //           entry.target.classList.remove("sAnimate");
-  //         }
-  //       });
-  //     });
-
-  //     document.querySelectorAll(".toAnimate").forEach((elem) => {
-  //       console.log("elem", elem);
-  //       observer.observe(elem);
-  //     });
-
-  //     return () => observer && observer.disconnect();
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if (observer.current)
-  //     document.querySelectorAll(".toAnimate").forEach((elem) => {
-  //       console.log("elem", elem);
-  //       observer.current?.observe(elem);
-  //     });
-  // }, [observer]);
-
   return (
     <>
       {animationType === "framerMotionUp" ? (

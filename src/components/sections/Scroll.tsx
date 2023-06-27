@@ -18,8 +18,7 @@ const Scroll = ({ ToAnimate, animationType }: SectionProps) => {
               ),
             ]}
             options={{
-              // role: "presentation",
-              "aria-label": "Test",
+              role: "presentation",
               id: "smallElem",
             }}
           />

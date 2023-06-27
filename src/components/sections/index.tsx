@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect, useEffect } from "react";
+import { useRef, useLayoutEffect } from "react";
 import { FeatureBundle } from "framer-motion";
 import "./sections.css";
 
@@ -10,6 +10,9 @@ import InfiniteTxt from "./infiniteTxt";
 import Friends from "./friends";
 import ToAnimate from "../ToAnimate";
 
+import { useGlobalContext } from "../../contexts/GlobalContext";
+import useIntersectionObserverOnCSS from "../../hooks/useIntersectionObserverOnCSS";
+
 /* I used used framer-motion's LazyMotion and m (m is used in ToAnimate.tsx) modules to optimize 
    bundle size. By importing a feature bundle, domAnimation, only the necessary 'web' features are
    included, such as animations, variants, exit animations, and tap/hover/focus gestures. So, by 
@@ -17,84 +20,68 @@ import ToAnimate from "../ToAnimate";
 */
 
 const Sections = () => {
-  const [animationType, setAnimationType] = useState(""),
-    FramerFeatureBundleRef = useRef<{
-      LazyMotion?: React.ElementType;
-      domAnimation?: FeatureBundle;
-    }>({});
+  const FramerFeatureBundleRef = useRef<{
+    LazyMotion?: React.ElementType;
+    domAnimation?: FeatureBundle;
+  }>({});
 
-  const typeSetter = (type: string) => {
-    setTimeout(() => {
-      setAnimationType(type);
-    }, 2500);
-  };
+  const { animationType, setAnimationType, isLoaded, setIsLoaded } =
+    useGlobalContext();
 
-  // To dynamically import what is needed depending on the animation type.
+  // To dynamically import what is needed depending on the animation type and to initialize animationType.
   useLayoutEffect(() => {
     const loadAnimationType = async () => {
+      setIsLoaded((prev) => ({ ...prev, animationType: false }));
       const storageType = localStorage.getItem("animation_type")
         ? localStorage.getItem("animation_type")!
         : "css";
 
-      if (
-        storageType === "framerMotionSide" ||
-        storageType === "framerMotionUp"
-      ) {
-        const { LazyMotion, domAnimation } = await import(
-          "../../utils/framerImports"
-        );
-        FramerFeatureBundleRef.current = {
-          LazyMotion: LazyMotion,
-          domAnimation: domAnimation,
-        };
+      try {
+        if (
+          storageType === "framerMotionSide" ||
+          storageType === "framerMotionUp"
+        ) {
+          const { LazyMotion, domAnimation } = await import(
+            "../../utils/framerImports"
+          );
+          FramerFeatureBundleRef.current = {
+            LazyMotion: LazyMotion,
+            domAnimation: domAnimation,
+          };
 
-        if (storageType === "framerMotionSide") {
-          typeSetter("framerMotionSide");
-        } else if (storageType === "framerMotionUp") {
-          typeSetter("framerMotionUp");
+          if (!animationType) {
+            if (storageType === "framerMotionSide") {
+              setAnimationType("framerMotionSide");
+            } else if (storageType === "framerMotionUp") {
+              setAnimationType("framerMotionUp");
+            } else {
+              throw new Error(
+                "Invalid animation type was unexpectedly retrieved from local storage!?"
+              );
+            }
+          }
+        } else if (storageType === "css") {
+          await import("../../scroll.css");
+          if (!animationType) setAnimationType("css");
         } else {
           throw new Error(
             "Invalid animation type was unexpectedly retrieved from local storage!?"
           );
         }
-      } else if (storageType === "css") {
-        typeSetter("css");
-      } else {
-        throw new Error(
-          "Invalid animation type was unexpectedly retrieved from local storage!?"
-        );
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setTimeout(() => {
+          setIsLoaded((prev) => ({ ...prev, animationType: true }));
+        }, 2500);
       }
     };
     loadAnimationType();
-  }, []);
-
-  useEffect(() => {
-    if (animationType === "css") {
-      console.log("RUNNING");
-
-      const observer = new IntersectionObserver((entries) => {
-        console.log("entries", entries);
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("sAnimate");
-          } else {
-            entry.target.classList.remove("sAnimate");
-          }
-        });
-      });
-
-      document.querySelectorAll(".toAnimate").forEach((elem) => {
-        console.log("elem", elem);
-        observer.observe(elem);
-      });
-
-      return () => observer && observer.disconnect();
-    }
   }, [animationType]);
 
   return (
     <>
-      {animationType ? (
+      {isLoaded.animationType ? (
         animationType === "css" ? (
           <>
             <SectionContent animationType={animationType} />
@@ -119,6 +106,7 @@ const Sections = () => {
 
 const SectionContent = ({ animationType }: { animationType: string }) => {
   const infiniteSectionRef = useRef<HTMLDivElement>(null);
+  useIntersectionObserverOnCSS(animationType);
 
   return (
     <>

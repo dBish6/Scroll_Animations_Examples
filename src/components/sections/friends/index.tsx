@@ -1,19 +1,22 @@
-import { useRef, useState, useLayoutEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { SectionProps } from "../../../@types/SectionsProps";
 import friendImages from "../../../assets/images/bundle";
 import ImageCard from "./ImageCard";
 
 const Friends = ({ ToAnimate, animationType }: SectionProps) => {
-  const [disableActions, setDisableActions] = useState(true),
-    cardRef = useRef<HTMLDivElement>(null);
+  const [disableActions, setDisableActions] = useState(true);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
-    let observer: IntersectionObserver;
+  useEffect(() => {
+    if (cardRef.current && animationType) {
+      const ANIMATION_DURATION =
+        animationType === "framerMotionUp"
+          ? 2138
+          : animationType === "framerMotionSide"
+          ? 1300
+          : 1900;
 
-    if (cardRef.current && animationType !== "css") {
-      const ANIMATION_DURATION = 2138;
-
-      observer = new IntersectionObserver((entries) => {
+      const observer = new IntersectionObserver((entries) => {
         const [entry] = entries;
         if (entry.isIntersecting) {
           setTimeout(() => {
@@ -24,8 +27,9 @@ const Friends = ({ ToAnimate, animationType }: SectionProps) => {
         }
       });
       observer.observe(cardRef.current);
+
+      return () => observer && observer.disconnect();
     }
-    return () => observer && observer.disconnect();
   }, []);
 
   return (
@@ -43,9 +47,6 @@ const Friends = ({ ToAnimate, animationType }: SectionProps) => {
               name={obj.name}
               cardRef={cardRef}
               disableActions={disableActions}
-              setDisableActions={
-                animationType === "css" ? setDisableActions : undefined
-              }
             />
           );
         })}

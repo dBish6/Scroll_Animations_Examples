@@ -4,11 +4,10 @@ export type ToAnimateProps = {
   options?: object & {
     role?: string;
     "aria-label"?: string;
-    id?: string | number;
+    id?: string;
     className?: string;
     key?: string | number;
     ref?: React.RefObject<any>;
-    setDisableActions?: React.Dispatch<React.SetStateAction<boolean>>;
   };
   children?:
     | string
