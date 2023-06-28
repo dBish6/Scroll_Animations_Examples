@@ -5,15 +5,6 @@ export type SectionProps = {
   animationType: string;
 };
 
-export type ImageCardProps = SectionProps & {
-  index: number;
-  src: string;
-  name: string;
-  cardRef?: React.RefObject<HTMLDivElement>;
-  disableActions?: boolean;
-  setDisableActions?: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
 export type InfiniteProps = {
   animationType: string;
   infiniteSectionRef: React.RefObject<HTMLDivElement>;
@@ -21,4 +12,12 @@ export type InfiniteProps = {
 
 export type InfiniteFramerProps = InfiniteProps & {
   baseVelocity: number;
+};
+
+export type ImageCardProps = SectionProps & {
+  index: number;
+  src: string;
+  name: string;
+  cardRef: React.RefObject<HTMLDivElement>;
+  disableActions: boolean;
 };

@@ -1,3 +1,7 @@
+.toAnimate {
+  visibility: hidden;
+}
+
 .toAnimate.sAnimate {
   animation: fadeInLeft 1.3s ease-out both;
 }

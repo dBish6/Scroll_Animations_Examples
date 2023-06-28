@@ -1,75 +1,38 @@
-import { useLayoutEffect, useTransition, createElement } from "react";
 import { ToAnimateProps } from "../@types/ToAnimateProps";
 import { m, Variants } from "framer-motion";
-import loadScrollCSS from "../utils/loadScrollCSS";
+import { useGlobalContext } from "../contexts/GlobalContext";
 
-const ToAnimate = ({ animation, tag, options, children }: ToAnimateProps) => {
-  const [isPending, startTransition] = useTransition();
-  // console.log("animation", animation);
+const ToAnimate = ({
+  animation,
+  tag: Tag,
+  options,
+  children,
+}: ToAnimateProps) => {
+  const key = animation; // Used to trigger a re-render of this component when animation changes.
 
   if (animation === "css") {
-    useLayoutEffect(() => {
-      let observer: IntersectionObserver;
+    const { isLoaded } = useGlobalContext();
 
-      startTransition(() => {
-        loadScrollCSS().then(() => {
-          observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-              const isCardOptions =
-                entry.target.classList.contains("card") &&
-                options &&
-                options.setDisableActions;
-
-              if (entry.isIntersecting) {
-                entry.target.classList.add("sAnimate");
-                if (isCardOptions) {
-                  setTimeout(() => {
-                    options.setDisableActions!(false); // To enable the action on the ImageCard.
-                  }, 1900); // Keyframes duration with delay.
-                }
-              } else {
-                entry.target.classList.remove("sAnimate");
-                if (isCardOptions) options.setDisableActions!(true);
-              }
-            });
-          });
-
-          document.querySelectorAll(".toAnimate").forEach((elem) => {
-            observer.observe(elem);
-          });
-        });
-      });
-      return () => observer && observer.disconnect();
-    }, []);
-
-    if (!isPending) {
-      let filteredOptions: object | undefined = undefined;
-      if (options) {
-        filteredOptions = options;
-        if (options.setDisableActions) {
-          // Removes setDisableActions from being applied to the element.
-          const { setDisableActions, ...rest } = options;
-          filteredOptions = rest;
+    return (
+      <Tag
+        key={key}
+        {...(options as any)} // I was getting the "Too complex" type error so...
+        className={
+          options && options.className
+            ? `toAnimate ${options.className}`
+            : "toAnimate"
         }
-      }
-      return createElement(
-        tag,
-        {
-          ...filteredOptions,
-          className:
-            options && options.className
-              ? `toAnimate ${options.className}`
-              : "toAnimate",
-        },
-        children
-      );
-    }
-    return null;
+        style={{
+          visibility: isLoaded.observer ? "visible" : "hidden",
+        }}
+      >
+        {children}
+      </Tag>
+    );
   } else if (
     animation === "framerMotionSide" ||
     animation === "framerMotionUp"
   ) {
-    // options && console.log("options.id", options.id);
     const isHeroElement = options && options.id === "heroElem",
       isCard = options && options.id?.toString().includes("card"),
       isSmallElement = options && options.id === "smallElem";
@@ -114,17 +77,17 @@ const ToAnimate = ({ animation, tag, options, children }: ToAnimateProps) => {
       },
     };
 
-    return createElement(
-      (m as any)[tag],
-      {
-        ...options,
-        "aria-label": "Test",
-        variants: fadeIn,
-        initial: "offscreen",
-        whileInView: "onscreen",
-        // viewport: { once: true },
-      },
-      children
+    const MotionTag = (m as any)[Tag];
+    return (
+      <MotionTag
+        key={key}
+        variants={fadeIn}
+        initial="offscreen"
+        whileInView="onscreen"
+        {...options}
+      >
+        {children}
+      </MotionTag>
     );
   } else {
     throw new Error(

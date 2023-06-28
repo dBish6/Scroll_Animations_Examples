@@ -171,33 +171,3 @@ header > div div:nth-child(2) .panel li button:active {
     gap: 0.5rem;
   }
 }
-
-/* Type Buttons Loader */
-header > div div .typeBtn.loading,
-header > div div:nth-child(2) .panel li button.loading {
-  display: grid;
-}
-
-.spinner {
-  justify-self: center;
-  align-self: center;
-  border: solid 3px var(--accentLgt);
-  border-top: solid 3px rgb(77, 18, 117);
-  border-radius: 50%;
-  width: 1.5rem;
-  height: 1.5rem;
-  transition: all 0.5s;
-  animation: rotation 1.2s infinite cubic-bezier(0.785, 0.135, 0.15, 0.86);
-}
-
-header > div div:nth-child(2) .panel li button.loading .spinner {
-  border-width: 2px;
-  width: 1rem;
-  height: 1rem;
-}
-
-@keyframes rotation {
-  100% {
-    transform: rotate(360deg);
-  }
-}
