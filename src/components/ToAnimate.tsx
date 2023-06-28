@@ -16,7 +16,7 @@ const ToAnimate = ({
     return (
       <Tag
         key={key}
-        {...options}
+        {...(options as any)} // I was getting the "Too complex" type error so...
         className={
           options && options.className
             ? `toAnimate ${options.className}`
