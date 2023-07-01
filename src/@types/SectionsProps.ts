@@ -18,6 +18,5 @@ export type ImageCardProps = SectionProps & {
   index: number;
   src: string;
   name: string;
-  cardRef: React.RefObject<HTMLDivElement>;
   disableActions: boolean;
 };

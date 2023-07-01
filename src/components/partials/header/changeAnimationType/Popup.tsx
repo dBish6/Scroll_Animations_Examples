@@ -1,8 +1,15 @@
 import { PopupProps } from "../../../../@types/PopupProps";
 
-const Popup = ({ animationType, setAnimationType }: PopupProps) => {
+const Popup = ({ animationType, setAnimationType, isClicked }: PopupProps) => {
   return (
-    <div aria-label="Select Panel" role="group" id="popup" className="panel">
+    <div
+      aria-label="Select Panel"
+      role="group"
+      id="popup"
+      className={
+        isClicked.css || isClicked.framer ? "panel animateIn" : "panel"
+      }
+    >
       <div>
         <h5>Select Type</h5>
       </div>
@@ -10,9 +17,12 @@ const Popup = ({ animationType, setAnimationType }: PopupProps) => {
         <li>
           <button
             onClick={() => {
-              if (animationType !== "framerMotionSide") {
+              if (isClicked.framer && animationType !== "framerMotionSide") {
                 localStorage.setItem("animation_type", "framerMotionSide");
                 setAnimationType("framerMotionSide");
+              } else if (isClicked.css && animationType !== "cssSide") {
+                localStorage.setItem("animation_type", "cssSide");
+                setAnimationType("cssSide");
               }
             }}
           >
@@ -22,9 +32,12 @@ const Popup = ({ animationType, setAnimationType }: PopupProps) => {
         <li>
           <button
             onClick={() => {
-              if (animationType !== "framerMotionUp") {
+              if (isClicked.framer && animationType !== "framerMotionUp") {
                 localStorage.setItem("animation_type", "framerMotionUp");
                 setAnimationType("framerMotionUp");
+              } else if (isClicked.css && animationType !== "cssUp") {
+                localStorage.setItem("animation_type", "cssUp");
+                setAnimationType("cssUp");
               }
             }}
           >

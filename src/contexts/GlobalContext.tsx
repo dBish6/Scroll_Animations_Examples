@@ -1,5 +1,5 @@
 import { GlobalContextValues } from "../@types/GlobalContextValues";
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 const GlobalContextContext = createContext<GlobalContextValues | undefined>(
   undefined
@@ -12,7 +12,8 @@ export const GlobalContextProvider: React.FC<React.PropsWithChildren<{}>> = ({
       animationType: false,
       observer: false,
     }),
-    [animationType, setAnimationType] = useState("");
+    [animationType, setAnimationType] = useState(""),
+    [disableActions, setDisableActions] = useState(true);
 
   // useEffect(() => {
   //   console.log("isLoaded", isLoaded);
@@ -29,6 +30,8 @@ export const GlobalContextProvider: React.FC<React.PropsWithChildren<{}>> = ({
         setAnimationType,
         isLoaded,
         setIsLoaded,
+        disableActions,
+        setDisableActions,
       }}
     >
       {children}

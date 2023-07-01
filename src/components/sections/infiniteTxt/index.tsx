@@ -5,10 +5,10 @@ import InfiniteFramer from "./InfiniteFramer";
 const index = ({ animationType, infiniteSectionRef }: InfiniteProps) => {
   return (
     <>
-      {animationType === "css" ? (
+      {animationType === "cssSide" || animationType === "cssUp" ? (
         <>
           <InfiniteCSS direction="left" />
-          <InfiniteCSS />
+          <InfiniteCSS direction="right" />
         </>
       ) : (
         <>

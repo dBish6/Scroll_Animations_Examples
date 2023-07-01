@@ -1,34 +1,39 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { SectionProps } from "../../../@types/SectionsProps";
 import friendImages from "../../../assets/images/bundle";
 import ImageCard from "./ImageCard";
+import { useGlobalContext } from "../../../contexts/GlobalContext";
 
 const Friends = ({ ToAnimate, animationType }: SectionProps) => {
-  const [disableActions, setDisableActions] = useState(true);
   const cardRef = useRef<HTMLDivElement>(null);
+  const { disableActions, setDisableActions } = useGlobalContext();
 
+  // To disable pointer events on the imageCard when animating in because of the tilt effect. The IntersectionObserver
+  // on CSS does the same thing; I tried to use only one IntersectionObserver per animation type.
   useEffect(() => {
-    if (cardRef.current && animationType) {
+    if (
+      cardRef.current &&
+      (animationType === "framerMotionSide" ||
+        animationType === "framerMotionUp")
+    ) {
       const ANIMATION_DURATION =
-        animationType === "framerMotionUp"
-          ? 2138
-          : animationType === "framerMotionSide"
-          ? 1300
-          : 1900;
+        animationType === "framerMotionUp" ? 2138 : 1300;
 
       const observer = new IntersectionObserver((entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            setDisableActions(false);
-          }, ANIMATION_DURATION);
-        } else {
-          setDisableActions(true);
-        }
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setDisableActions(true);
+            setTimeout(() => {
+              setDisableActions(false);
+            }, ANIMATION_DURATION);
+          }
+        });
       });
-      observer.observe(cardRef.current);
+      document.querySelectorAll(".card").forEach((elem) => {
+        observer.observe(elem);
+      });
 
-      return () => observer && observer.disconnect();
+      return () => observer.disconnect();
     }
   }, []);
 
@@ -36,7 +41,7 @@ const Friends = ({ ToAnimate, animationType }: SectionProps) => {
     <>
       <ToAnimate animation={animationType} tag="h2" children="Friendly Faces" />
       <ToAnimate animation={animationType} tag="h3" children="Scroll Lovers" />
-      <div className="imagesContainer">
+      <div className="imagesContainer" ref={cardRef}>
         {friendImages.map((obj, i) => {
           return (
             <ImageCard
@@ -45,7 +50,6 @@ const Friends = ({ ToAnimate, animationType }: SectionProps) => {
               index={i}
               src={obj.img}
               name={obj.name}
-              cardRef={cardRef}
               disableActions={disableActions}
             />
           );

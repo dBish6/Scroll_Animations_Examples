@@ -1,6 +1,5 @@
 import { ToAnimateProps } from "../@types/ToAnimateProps";
 import { m, Variants } from "framer-motion";
-import { useGlobalContext } from "../contexts/GlobalContext";
 
 const ToAnimate = ({
   animation,
@@ -10,9 +9,7 @@ const ToAnimate = ({
 }: ToAnimateProps) => {
   const key = animation; // Used to trigger a re-render of this component when animation changes.
 
-  if (animation === "css") {
-    const { isLoaded } = useGlobalContext();
-
+  if (animation === "cssSide" || animation === "cssUp") {
     return (
       <Tag
         key={key}
@@ -22,9 +19,6 @@ const ToAnimate = ({
             ? `toAnimate ${options.className}`
             : "toAnimate"
         }
-        style={{
-          visibility: isLoaded.observer ? "visible" : "hidden",
-        }}
       >
         {children}
       </Tag>

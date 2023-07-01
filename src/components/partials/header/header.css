@@ -74,7 +74,7 @@ header > div div .typeBtn {
   min-height: 50px;
 }
 
-header > div div:nth-child(2) .panel {
+header > div div .panel {
   position: absolute;
   top: 35%;
   right: -6%;
@@ -83,19 +83,32 @@ header > div div:nth-child(2) .panel {
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
 }
 
-header > div div:nth-child(2) .panel > div {
+header > div div .panel.animateIn {
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+header > div div .panel > div {
   display: grid;
   position: relative;
   margin: 0.5rem 1rem;
 }
 
-header > div div:nth-child(2) .panel > div h5 {
+header > div div .panel > div h5 {
   justify-self: center;
   font-weight: 600;
   color: #f2f2f2;
 }
 
-header > div div:nth-child(2) .panel > div h5::after {
+header > div div .panel > div h5::after {
   content: "";
   display: block;
   height: 1px;
@@ -103,12 +116,12 @@ header > div div:nth-child(2) .panel > div h5::after {
   background: var(--accent);
 }
 
-header > div div:nth-child(2) .panel ul {
+header > div div .panel ul {
   display: flex;
   flex-direction: column;
 }
 
-header > div div:nth-child(2) .panel li button {
+header > div div .panel li button {
   width: 100%;
   height: 100%;
   max-height: 33px;
@@ -117,16 +130,16 @@ header > div div:nth-child(2) .panel li button {
   border-top: 1px solid rgb(255, 255, 255, 0.15);
 }
 
-header > div div:nth-child(2) .panel li:last-child button {
+header > div div .panel li:last-child button {
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
 }
 
-header > div div:nth-child(2) .panel li button:hover {
+header > div div .panel li button:hover {
   background-color: #534d62;
 }
 
-header > div div:nth-child(2) .panel li button:active {
+header > div div .panel li button:active {
   background-color: var(--accent);
 }
 
@@ -150,7 +163,7 @@ header > div div:nth-child(2) .panel li button:active {
     width: 100%;
   }
 
-  header > div div:nth-child(2) .panel {
+  header > div div .panel {
     width: 100%;
     max-width: 206px;
     right: 0;

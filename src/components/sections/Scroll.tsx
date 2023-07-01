@@ -4,7 +4,7 @@ import { SectionProps } from "../../@types/SectionsProps";
 const Scroll = ({ ToAnimate, animationType }: SectionProps) => {
   return (
     <>
-      {animationType === "framerMotionUp" ? (
+      {animationType === "framerMotionUp" || animationType === "cssUp" ? (
         <>
           <ToAnimate
             animation={animationType}

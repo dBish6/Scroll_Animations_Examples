@@ -6,7 +6,7 @@ import ScrollIndicator from "../scroll_Indicator";
 const Hero = ({ ToAnimate, animationType }: SectionProps) => {
   return (
     <>
-      {animationType === "framerMotionUp" ? (
+      {animationType === "framerMotionUp" || animationType === "cssUp" ? (
         <>
           <ToAnimate
             animation={animationType}

@@ -17,7 +17,6 @@ section:nth-child(1) div:not(.heroContainer, .indicator, .arrowContainer) {
 }
 
 section:nth-child(1) div h2 {
-  font-size: 4.6rem;
   font-size: clamp(
     2.625rem,
     1.5628151260504204rem + 5.310924369747898vw,

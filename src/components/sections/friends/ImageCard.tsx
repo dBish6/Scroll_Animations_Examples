@@ -8,7 +8,6 @@ const ImageCard = ({
   index,
   src,
   name,
-  cardRef,
   disableActions,
 }: ImageCardProps) => {
   return (
@@ -37,7 +36,6 @@ const ImageCard = ({
           }),
         ]}
         options={{
-          ref: cardRef,
           id: `card${index + 1}`,
           className: "card",
           "aria-label": `${name}'s Card`,

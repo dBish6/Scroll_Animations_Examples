@@ -11,4 +11,6 @@ export type GlobalContextValues = {
       observer: boolean;
     }>
   >;
+  disableActions: boolean;
+  setDisableActions: React.Dispatch<React.SetStateAction<boolean>>;
 };

@@ -12,6 +12,7 @@ import ToAnimate from "../ToAnimate";
 
 import { useGlobalContext } from "../../contexts/GlobalContext";
 import useIntersectionObserverOnCSS from "../../hooks/useIntersectionObserverOnCSS";
+import useResizeObserver from "../../hooks/useResizeObserver";
 
 /* I used used framer-motion's LazyMotion and m (m is used in ToAnimate.tsx) modules to optimize 
    bundle size. By importing a feature bundle, domAnimation, only the necessary 'web' features are
@@ -34,7 +35,7 @@ const Sections = () => {
       setIsLoaded((prev) => ({ ...prev, animationType: false }));
       const storageType = localStorage.getItem("animation_type")
         ? localStorage.getItem("animation_type")!
-        : "css";
+        : "cssSide";
 
       try {
         if (
@@ -60,9 +61,23 @@ const Sections = () => {
               );
             }
           }
-        } else if (storageType === "css") {
+        } else if (storageType === "cssSide" || storageType === "cssUp") {
           await import("../../scroll.css");
-          if (!animationType) setAnimationType("css");
+
+          const htmlTagStyle = document.documentElement.style;
+          if (
+            storageType === "cssSide" &&
+            htmlTagStyle.getPropertyValue("--anim") !== "fadeInSide"
+          ) {
+            htmlTagStyle.setProperty("--anim", "fadeInSide");
+            setAnimationType("cssSide");
+          } else if (
+            storageType === "cssUp" &&
+            htmlTagStyle.getPropertyValue("--anim") !== "fadeInUp"
+          ) {
+            htmlTagStyle.setProperty("--anim", "fadeInUp");
+            setAnimationType("cssUp");
+          }
         } else {
           throw new Error(
             "Invalid animation type was unexpectedly retrieved from local storage!?"
@@ -82,7 +97,7 @@ const Sections = () => {
   return (
     <>
       {isLoaded.animationType ? (
-        animationType === "css" ? (
+        animationType === "cssSide" || animationType === "cssUp" ? (
           <>
             <SectionContent animationType={animationType} />
           </>
@@ -107,6 +122,7 @@ const Sections = () => {
 const SectionContent = ({ animationType }: { animationType: string }) => {
   const infiniteSectionRef = useRef<HTMLDivElement>(null);
   useIntersectionObserverOnCSS(animationType);
+  useResizeObserver();
 
   return (
     <>
