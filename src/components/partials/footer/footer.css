@@ -4,7 +4,7 @@ footer {
   align-items: flex-end;
   flex-direction: column;
   padding: 0.5rem 1.5rem;
-  margin-top: 4rem;
+  /* margin-top: 4rem; */
 }
 
 @media screen and (max-width: 1149px) {
@@ -13,11 +13,11 @@ footer {
   }
 }
 
-footer p:first-of-type {
+footer p {
   color: rgba(255, 255, 255, 0.87);
 }
 
-footer p:first-of-type:after {
+footer p:after {
   content: "";
   display: block;
   position: relative;
@@ -60,11 +60,4 @@ footer a img {
 footer small {
   color: rgba(255, 255, 255, 0.77);
   transform: skew(-15deg);
-}
-
-footer p:last-of-type {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

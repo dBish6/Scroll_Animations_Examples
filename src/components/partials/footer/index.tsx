@@ -15,8 +15,6 @@ const Footer = () => {
         </a>
       </p>
       <small>Special thanks to Open Peeps for the illustrations!</small>
-
-      <p>Copyright (c) 2023 David Bishop</p>
     </footer>
   );
 };
