@@ -7,12 +7,9 @@ const ToAnimate = ({
   options,
   children,
 }: ToAnimateProps) => {
-  const key = animation; // Used to trigger a re-render of this component when animation changes.
-
   if (animation === "cssSide" || animation === "cssUp") {
     return (
       <Tag
-        key={key}
         {...(options as any)} // I was getting the "Too complex" type error so...
         className={
           options && options.className
@@ -74,7 +71,6 @@ const ToAnimate = ({
     const MotionTag = (m as any)[Tag];
     return (
       <MotionTag
-        key={key}
         variants={fadeIn}
         initial="offscreen"
         whileInView="onscreen"

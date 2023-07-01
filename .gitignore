@@ -25,3 +25,4 @@ dist-ssr
 
 # Other
 framerVariants.ts.old
+useIntersectionObserverOnCSS.ts.old
