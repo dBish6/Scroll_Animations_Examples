@@ -10,6 +10,11 @@ export type InfiniteProps = {
   infiniteSectionRef: React.RefObject<HTMLDivElement>;
 };
 
+export type InfiniteCSSProps = {
+  direction: "left" | "right" | "up" | "down";
+  duration: string;
+};
+
 export type InfiniteFramerProps = InfiniteProps & {
   baseVelocity: number;
 };

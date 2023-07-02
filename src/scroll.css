@@ -56,14 +56,13 @@ section:nth-last-child(2) .scrollerWrapper {
 }
 
 section:nth-last-child(2) .scrollerWrapper .scroller {
-  animation: var(--dir) 16s linear infinite;
+  animation: var(--dir) var(--dur) linear infinite;
 }
 
 @keyframes left {
   0% {
     transform: translateX(930px);
   }
-
   100% {
     transform: translateX(-910px);
   }
@@ -73,8 +72,31 @@ section:nth-last-child(2) .scrollerWrapper .scroller {
   0% {
     transform: translateX(-930px);
   }
-
   100% {
     transform: translateX(910px);
+  }
+}
+
+@keyframes up {
+  0% {
+    transform: translateY(-48px);
+  }
+  50% {
+    transform: translateY(-436.5px);
+  }
+  100% {
+    transform: translateY(-48px);
+  }
+}
+
+@keyframes down {
+  0% {
+    transform: translateY(48px);
+  }
+  50% {
+    transform: translateY(436.5px);
+  }
+  100% {
+    transform: translateY(48px);
   }
 }

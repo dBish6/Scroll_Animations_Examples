@@ -9,8 +9,7 @@ const useIntersectionObserverOnCSS = (animationType: string) => {
 
     if (animationType === "cssSide" || animationType === "cssUp") {
       setIsLoaded((prev) => ({ ...prev, observer: false }));
-      const ANIMATION_DURATION = window.innerWidth <= 545 ? 1300 : 2200;
-      console.log("ANIMATION_DURATION", ANIMATION_DURATION);
+      const ANIMATION_DURATION = window.innerWidth <= 545 ? 1300 : 2300;
 
       observer = new IntersectionObserver(
         (entries) => {

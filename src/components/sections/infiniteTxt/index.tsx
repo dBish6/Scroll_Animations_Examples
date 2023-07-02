@@ -7,8 +7,14 @@ const index = ({ animationType, infiniteSectionRef }: InfiniteProps) => {
     <>
       {animationType === "cssSide" || animationType === "cssUp" ? (
         <>
-          <InfiniteCSS direction="left" />
-          <InfiniteCSS direction="right" />
+          <InfiniteCSS
+            direction={animationType === "cssUp" ? "up" : "left"}
+            duration={animationType === "cssSide" ? "16s" : "6.35s"}
+          />
+          <InfiniteCSS
+            direction={animationType === "cssUp" ? "down" : "right"}
+            duration={animationType === "cssSide" ? "16s" : "6.35s"}
+          />
         </>
       ) : (
         <>

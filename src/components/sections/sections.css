@@ -34,6 +34,7 @@ section:nth-child(1) div h2:last-child {
     rgb(122, 53, 230) 75%,
     rgb(255, 247, 247) 100%
   );
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-top: -1rem;

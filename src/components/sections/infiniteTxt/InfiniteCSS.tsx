@@ -1,13 +1,18 @@
+import { InfiniteCSSProps } from "../../../@types/SectionsProps";
 import { useEffect } from "react";
 
-const InfiniteCSS = ({ direction }: { direction?: "left" | "right" }) => {
+const InfiniteCSS = ({ direction, duration }: InfiniteCSSProps) => {
   useEffect(() => {
     const scrollerWrapper = document.querySelector(
       ".scrollerWrapper"
     ) as HTMLDivElement;
-    direction === "left"
-      ? scrollerWrapper.style.setProperty("--dir", "left")
-      : document.documentElement.style.setProperty("--dir", "right");
+    if (direction === "left" || direction === "up") {
+      document.documentElement.style.setProperty("--dir", direction);
+      document.documentElement.style.setProperty("--dur", duration);
+    } else {
+      scrollerWrapper.style.setProperty("--dir", direction);
+      scrollerWrapper.style.setProperty("--dur", duration);
+    }
   }, [direction]);
 
   return (
