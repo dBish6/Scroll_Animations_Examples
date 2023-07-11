@@ -6,11 +6,11 @@ This repository acts as a demo and showcases different scroll-triggered animatio
 You can choose between two animation types; CSS KeyFrames and Framer Motion. Simply utilize the buttons located on the 'navigation' bar to switch between the two.
 
 **CSS KeyFrames**
-- Animate from the side.
-- Animate up. \*_Coming Soon_\*
+- Animate side.
+- Animate up.
 
 **Framer Motion**
-- Animate from the side.
+- Animate side.
 - Animate up.
 - Infinite text increases velocity when scrolling up or down; has side and up variations.
 
