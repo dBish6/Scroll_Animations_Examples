@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "author": "David Bishop",
   "description": "A demo application of different type of scroll triggered animations with CSS and Framer Motion.",
+  "repository": "https://github.com/dBish6/Scroll_Animations_Examples",
   "license": "MIT",
   "type": "module",
   "scripts": {
