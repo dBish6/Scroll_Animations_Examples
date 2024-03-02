@@ -21,3 +21,8 @@ You can choose between two animation types; CSS KeyFrames and Framer Motion. Sim
 - Start Scrolling indicator.
 - Infinite scrolling text with CSS keyframes.
 - Parallax tilt hover effect on cards.
+
+## Support Me
+I hope these examples serve as a learning resource. If you find this helpful consider buying me a coffee, your support helps me stay motivated!
+
+<a href="https://www.buymeacoffee.com/dBish" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
